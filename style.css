@@ -610,18 +610,6 @@ html{ scrollbar-color:var(--rose-300) var(--blush-50); }
   --grass-near: #2e590e;
 }
 
-/* Prevent accidental zooming/scrolling on mobile while tapping */
-body, html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
 .meadow {
   position: relative;
   width: 100vw;
@@ -630,6 +618,10 @@ body, html {
   background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-bottom) 50%, #e2f0d9 100%);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  /* keeps taps in the meadow from triggering page scroll/zoom, without locking the whole page */
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
 /* Atmospheric Sky Glow */
