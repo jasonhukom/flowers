@@ -1,0 +1,1133 @@
+/* ========================================================
+   Malika — a garden, for you
+   ======================================================== */
+
+:root{
+  --blush-50:  #FFF6F8;
+  --blush-100: #FFE9F0;
+  --blush-200: #FBD8E4;
+  --rose-500:  #D6336C;
+  --rose-400:  #E85585;
+  --rose-300:  #FF8FAB;
+  --rose-100:  #FFD6E4;
+  --cream:     #FFFBF6;
+  --green-600: #3F6B33;
+  --green-400: #7FAF6A;
+  --gold-400:  #F2C14E;
+  --ink:       #3A2230;
+  --ink-soft:  #6B4A57;
+
+  --font-serif:  Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+  --font-script: 'Snell Roundhand', 'Segoe Script', 'Brush Script MT', cursive;
+}
+
+*, *::before, *::after{ box-sizing:border-box; }
+
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+}
+
+body{
+  margin:0;
+  width:100%;
+  overflow-x:hidden;
+  font-family:var(--font-serif);
+  color:var(--ink);
+  background:linear-gradient(180deg,var(--blush-50),var(--blush-100));
+  -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3,p{ margin:0; }
+
+button{
+  font:inherit;
+  color:inherit;
+  background:none;
+  border:none;
+  padding:0;
+  cursor:pointer;
+}
+
+button:focus-visible{
+  outline:2px solid var(--rose-500);
+  outline-offset:4px;
+  border-radius:8px;
+}
+
+img,svg{ max-width:100%; }
+
+::selection{ background:var(--rose-300); color:#fff; }
+
+::-webkit-scrollbar{ width:10px; }
+::-webkit-scrollbar-track{ background:var(--blush-50); }
+::-webkit-scrollbar-thumb{ background:var(--rose-300); border-radius:10px; }
+html{ scrollbar-color:var(--rose-300) var(--blush-50); }
+
+
+/* SVG definitions are invisible layout resources, never visible page content. */
+.sr-only-defs{
+  position:absolute;
+  width:0 !important;
+  height:0 !important;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+/* ========================================
+   ELEGANT BOUQUET
+   Designed to sit naturally inside the hero
+   ======================================== */
+
+.bouquet{
+  position:absolute;
+  left:50%;
+  bottom:18px;
+  width:min(460px,92vw);
+  height:330px;
+  transform:translateX(-50%);
+  z-index:3;
+  pointer-events:none;
+}
+
+.bouquet-stems{
+  position:absolute;
+  left:50%;
+  bottom:48px;
+  width:180px;
+  height:190px;
+  transform:translateX(-50%);
+  z-index:1;
+}
+
+.bouquet-stems::before,
+.bouquet-stems::after,
+.bouquet-stems{
+  background:transparent;
+}
+
+.bouquet-stems::before,
+.bouquet-stems::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:50%;
+  width:3px;
+  height:190px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#87aa70,#4d773f);
+  transform-origin:bottom center;
+}
+
+.bouquet-stems::before{ transform:translateX(-50%) rotate(-14deg); }
+.bouquet-stems::after{ transform:translateX(-50%) rotate(13deg); }
+
+.bouquet-leaves{
+  position:absolute;
+  inset:0;
+  z-index:5;
+}
+
+.leaf{
+  position:absolute;
+  width:86px;
+  height:34px;
+  border-radius:100% 0 100% 0;
+  background:linear-gradient(140deg,#a4c987,#648f50 60%,#456f39);
+  box-shadow:inset 0 1px 3px rgba(255,255,255,.3),0 5px 8px rgba(50,80,40,.12);
+}
+
+.leaf::after{
+  content:"";
+  position:absolute;
+  left:12%;
+  top:50%;
+  width:76%;
+  height:1px;
+  background:rgba(43,78,37,.28);
+  transform:rotate(-8deg);
+}
+
+.leaf-a{ left:7%; bottom:86px; transform:rotate(-28deg); }
+.leaf-b{ left:18%; bottom:55px; transform:rotate(-8deg) scale(.8); }
+.leaf-c{ right:7%; bottom:90px; transform:scaleX(-1) rotate(-25deg); }
+.leaf-d{ right:18%; bottom:56px; transform:scaleX(-1) rotate(-8deg) scale(.8); }
+.leaf-e{ left:50%; bottom:96px; transform:translateX(-50%) rotate(8deg) scale(.72); }
+
+.bouquet-flower{
+  position:absolute;
+  display:block;
+  overflow:visible;
+  object-fit:contain;
+  filter:drop-shadow(0 7px 9px rgba(90,35,60,.14));
+  transform-origin:50% 85%;
+  animation:bouquet-breathe 6s ease-in-out infinite;
+}
+
+.bouquet-flower::after{
+  content:"";
+}
+
+.flower-1{ width:128px; height:128px; left:50%;  top:0px;   transform:translateX(-50%) rotate(-2deg); z-index:14; }
+.flower-2{ width:96px;  height:96px;  left:26%;  top:22px;  transform:rotate(-16deg); z-index:12; }
+.flower-3{ width:100px; height:100px; left:74%;  top:18px;  transform:translateX(-100%) rotate(15deg); z-index:12; }
+.flower-4{ width:112px; height:112px; left:14%;  top:70px;  transform:rotate(-20deg); z-index:11; }
+.flower-5{ width:114px; height:114px; left:86%;  top:66px;  transform:translateX(-100%) rotate(18deg); z-index:11; }
+.flower-6{ width:80px;  height:80px;  left:30%;  top:112px; transform:rotate(-10deg); z-index:13; }
+.flower-7{ width:80px;  height:80px;  left:70%;  top:108px; transform:translateX(-100%) rotate(10deg); z-index:13; }
+.flower-8{ width:62px;  height:62px;  left:41%;  top:140px; transform:rotate(-8deg); z-index:15; }
+.flower-9{ width:62px;  height:62px;  left:59%;  top:138px; transform:translateX(-100%) rotate(8deg); z-index:15; }
+
+.flower-1 g,.flower-2 g,.flower-3 g,.flower-4 g,.flower-5 g,.flower-6 g,.flower-7 g,.flower-8 g,.flower-9 g{
+  transform-box:fill-box;
+  transform-origin:center;
+}
+
+.bouquet-paper{
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:262px;
+  height:170px;
+  transform:translateX(-50%);
+  z-index:2;
+  background:linear-gradient(145deg,#e9a7bd 0%,#d783a4 45%,#c7698f 100%);
+  clip-path:polygon(5% 0,95% 0,100% 100%,64% 79%,50% 100%,36% 79%,0 100%);
+  box-shadow:0 18px 32px rgba(110,45,70,.18),inset 0 1px 0 rgba(255,255,255,.28);
+}
+
+.paper-shine{
+  position:absolute;
+  top:0;
+  left:50%;
+  width:38%;
+  height:100%;
+  transform:translateX(-50%) skewX(-5deg);
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.13),rgba(255,255,255,0));
+}
+
+.bouquet-tie{
+  position:absolute;
+  left:50%;
+  bottom:86px;
+  width:64px;
+  height:24px;
+  transform:translateX(-50%);
+  border-radius:7px;
+  background:linear-gradient(180deg,#d77da0,#b9577e);
+  box-shadow:0 4px 8px rgba(90,35,60,.18);
+  z-index:3;
+}
+
+.bouquet-ribbon{
+  position:absolute;
+  bottom:34px;
+  width:62px;
+  height:78px;
+  background:linear-gradient(155deg,#da82a5,#ba597e);
+  filter:drop-shadow(0 5px 7px rgba(90,35,60,.12));
+  z-index:4;
+}
+
+.ribbon-left{
+  left:calc(50% - 58px);
+  transform:rotate(12deg);
+  clip-path:polygon(0 0,100% 8%,74% 76%,47% 100%,38% 69%,0 86%);
+}
+
+.ribbon-right{
+  left:calc(50% - 8px);
+  transform:rotate(-12deg);
+  clip-path:polygon(0 8%,100% 0,100% 86%,62% 69%,53% 100%,26% 76%);
+}
+
+@keyframes bouquet-breathe{
+  0%,100%{ margin-top:0; }
+  50%{ margin-top:-3px; }
+}
+
+@media(max-width:640px){
+  .bouquet{
+    width:min(420px,94vw);
+    max-width:none;
+    left:50%;
+    bottom:2px;
+    transform:translateX(-50%) scale(.82);
+    transform-origin:center bottom;
+  }
+}
+
+/* ---------------------------------------------------------
+   ambient falling petals + one-off particle bursts
+   --------------------------------------------------------- */
+
+.petal-field{
+  position:fixed; inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:40;
+}
+
+.petal{
+  position:absolute;
+  top:-12%;
+  border-radius:0% 60% 0% 60%;
+  opacity:0;
+  box-shadow:0 1px 3px rgba(120,40,70,.12);
+  animation:fall var(--dur,14s) linear var(--delay,0s) infinite;
+}
+.petal--white{ background:linear-gradient(135deg,#ffffff,#FDE6EE); }
+.petal--pink{  background:linear-gradient(135deg,#FFD1E1,#FF8FAB); }
+.petal--rose{  background:linear-gradient(135deg,#FF9FBD,#D6336C); }
+
+@keyframes fall{
+  0%   { transform:translateY(-10vh) translateX(0) rotate(0deg); opacity:0; }
+  8%   { opacity:.85; }
+  50%  { transform:translateY(52vh) translateX(var(--drift,24px)) rotate(180deg); }
+  92%  { opacity:.85; }
+  100% { transform:translateY(112vh) translateX(0) rotate(360deg); opacity:0; }
+}
+
+.burst-layer{
+  position:fixed; inset:0;
+  pointer-events:none;
+  z-index:70;
+  overflow:visible;
+}
+
+.burst-particle{
+  position:fixed; left:0; top:0;
+  opacity:1;
+  animation:burst-fly var(--dur,.8s) ease-out forwards;
+}
+@keyframes burst-fly{
+  0%   { transform:translate(-50%,-50%) translate(0,0) rotate(0deg) scale(1); opacity:1; }
+  100% { transform:translate(-50%,-50%) translate(var(--dx,40px),var(--dy,-40px)) rotate(var(--rot,180deg)) scale(.35); opacity:0; }
+}
+.bp-petal{ width:14px; height:14px; border-radius:0% 60% 0% 60%; background:linear-gradient(135deg,#fff,#FDE6EE); }
+.bp-petal.c2{ background:linear-gradient(135deg,#FFD1E1,#FF8FAB); }
+.bp-petal.c3{ background:linear-gradient(135deg,#FF9FBD,#D6336C); }
+.bp-sparkle{ width:8px; height:8px; border-radius:50%; background:radial-gradient(circle,#fff,rgba(255,255,255,0) 70%); box-shadow:0 0 8px rgba(255,255,255,.95); }
+.bp-flower{ width:22px; height:22px; }
+
+/* ---------------------------------------------------------
+   MEADOW & GARDEN BASE STYLING
+   --------------------------------------------------------- */
+
+:root {
+  --sky-top: #a1c4fd;
+  --sky-bottom: #c2e9fb;
+}
+
+.meadow {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-bottom) 50%, #e2f0d9 100%);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  /* keeps taps in the meadow from triggering page scroll/zoom, without locking the whole page */
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+/* Atmospheric Sky Glow */
+.meadow-sky {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sun-glow {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 50vh;
+  background: radial-gradient(circle, rgba(255,255,225,0.8) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none;
+}
+
+/* Single green grass layer */
+.garden-grass {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 43%;
+  background:
+    radial-gradient(
+      ellipse at 50% 115%,
+      #46751e 0%,
+      #5f8c28 42%,
+      #79a83d 72%,
+      rgba(121,168,61,0) 100%
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.garden-grass::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 24%;
+  background: linear-gradient(
+    to top,
+    rgba(39,78,15,.42),
+    rgba(39,78,15,0)
+  );
+}
+
+/* Title text overlay */
+.meadow-title {
+  position: absolute;
+  top: 8%;
+  width: 100%;
+  text-align: center;
+  color: #2c4213;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+  z-index: 2;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.meadow-title h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.meadow-title p {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Flower container layer */
+.meadow-plant {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+
+/* ---------------------------------------------------------
+   FLOWER & ITEM ANIMATIONS
+   --------------------------------------------------------- */
+
+.meadow-item {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+}
+
+.flower-instance {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: 50% 100%;
+  animation: sway var(--sway-dur, 5s) ease-in-out var(--sway-delay, 0s) infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(calc(var(--base-rot, 0deg) - 2deg)); }
+  50%      { transform: rotate(calc(var(--base-rot, 0deg) + 2.5deg)); }
+}
+
+.grow-mask {
+  width: 100%;
+  clip-path: inset(100% 0 0 0);
+  opacity: 0.2;
+  animation: sprout 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.27) forwards;
+}
+
+@keyframes sprout {
+  0%   { clip-path: inset(100% 0 0 0); opacity: 0.2; transform: scale(0.6); }
+  100% { clip-path: inset(0 0 0 0); opacity: 1; transform: scale(1); }
+}
+
+.meadow-item.is-settled .grow-mask {
+  animation: none;
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------
+   INTERACTIVE BUTTONS & PARTICLES
+   --------------------------------------------------------- */
+
+/* Center special flower button */
+.favorite-flower {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 6;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.favorite-flower .halo {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 80px; height: 80px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  animation: pulseHalo 3s ease-in-out infinite;
+}
+
+@keyframes pulseHalo {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.5; }
+  50%      { transform: translate(-50%, -50%) scale(1.3); opacity: 0.9; }
+}
+
+/* Reset button styling */
+.meadow-reset {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 12;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.meadow-reset:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* Tap particle / sparkle effect */
+.ambient-sparkle {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 20%, #ffd700 80%);
+  box-shadow: 0 0 8px #ffd700;
+  pointer-events: none;
+  animation: sparklePop 0.8s ease-out forwards;
+}
+
+@keyframes sparklePop {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(0.2); }
+  100% { opacity: 0; transform: translate(var(--dx, -50%), var(--dy, -50%)) scale(1.5); }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 600px) {
+  .meadow-title h2 {
+    font-size: 1.25rem;
+  }
+  .meadow-title p {
+    font-size: 0.8rem;
+  }
+  .meadow-reset {
+    bottom: 12px;
+    right: 12px;
+    padding: 6px 12px;
+  }
+}
+
+/* ---------------------------------------------------------
+   hero
+   --------------------------------------------------------- */
+
+.hero{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:6vh 1.25rem;
+  /* overflow:hidden; */
+  background:radial-gradient(ellipse at 50% 22%, var(--blush-50), var(--blush-100) 72%);
+}
+
+.hero-inner{ position:relative; z-index:2; }
+
+.hero-name{
+  font-family:var(--font-script);
+  font-weight:400;
+  font-size:clamp(3.2rem,15vw,7rem);
+  color:var(--rose-500);
+  line-height:1;
+  text-shadow:0 6px 24px rgba(214,51,108,.25);
+}
+.hero-name span{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(22px) scale(.7);
+  animation:bloom-in .8s cubic-bezier(.22,.9,.32,1.2) forwards;
+}
+.hero-name span:nth-child(1){ animation-delay:.10s; }
+.hero-name span:nth-child(2){ animation-delay:.22s; }
+.hero-name span:nth-child(3){ animation-delay:.34s; }
+.hero-name span:nth-child(4){ animation-delay:.46s; }
+.hero-name span:nth-child(5){ animation-delay:.58s; }
+.hero-name span:nth-child(6){ animation-delay:.70s; }
+@keyframes bloom-in{ to{ opacity:1; transform:translateY(0) scale(1); } }
+
+.hero-subtitle{
+  margin-top:1rem;
+  font-size:clamp(1rem,2.4vw,1.25rem);
+  color:var(--ink-soft);
+  min-height:1.6em;
+  opacity:0;
+  animation:fade-rise 1s ease 1.05s forwards;
+}
+@keyframes fade-rise{ to{ opacity:1; transform:translateY(0); } }
+.letter-content p{ opacity:0; transform:translateY(14px); }
+
+.hero-cursor{
+  display:inline-block;
+  width:2px; height:1em;
+  background:var(--rose-300);
+  margin-left:2px;
+  vertical-align:-.15em;
+  animation:blink 1s step-end infinite;
+}
+@keyframes blink{ 50%{ opacity:0; } }
+
+.hero-flowers{
+  position:absolute;
+  left:0; right:0; bottom:-6px;
+  height:min(24vh,180px);
+  z-index:1;
+  pointer-events:none;
+}
+
+.scroll-cue{
+  position:absolute;
+  bottom:4vh; left:50%;
+  width:40px; height:40px;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--rose-400);
+  opacity:0;
+  transform:translate(-50%,0);
+  animation:fade-in .8s ease 1.3s forwards, bob 2.4s ease-in-out 2.3s infinite;
+}
+.scroll-cue svg{ width:22px; height:22px; }
+@keyframes fade-in{ to{ opacity:1; } }
+@keyframes bob{ 0%,100%{ transform:translate(-50%,0); } 50%{ transform:translate(-50%,6px); } }
+
+/* ---------------------------------------------------------
+   letter scene — hidden until opened
+   --------------------------------------------------------- */
+
+.letter-scene{
+  position:relative;
+  padding:10vh 1.25rem;
+  display:flex;
+  justify-content:center;
+}
+
+.letter-frame{
+  width:100%;
+  max-width:520px;
+}
+
+.envelope-stage{
+  max-height:460px;
+  overflow:hidden;
+  opacity:1;
+  text-align:center;
+  transition:max-height .6s ease .1s, opacity .5s ease .1s, margin .6s ease;
+}
+.letter-scene.is-open .envelope-stage{
+  max-height:0;
+  opacity:0;
+  margin:0;
+  pointer-events:none;
+}
+
+.envelope-trigger{ display:inline-block; }
+
+.envelope{
+  position:relative;
+  display:block;
+  width:min(260px,72vw);
+  aspect-ratio:3 / 2;
+  margin:0 auto;
+  perspective:600px;
+}
+.envelope-body{
+  position:absolute; inset:0;
+  border-radius:10px;
+  background:linear-gradient(160deg,#FFFDF9,#FDEFE3);
+  box-shadow:0 18px 34px -14px rgba(120,40,70,.35), inset 0 0 0 1px rgba(255,255,255,.6);
+}
+.envelope-peek{
+  position:absolute;
+  left:10%; right:10%; top:6%;
+  height:62%;
+  background:#FFFDF9;
+  border-radius:6px;
+  box-shadow:0 4px 10px rgba(120,40,70,.12);
+  transform:translateY(22%);
+  opacity:0;
+  transition:transform .6s ease .35s, opacity .5s ease .35s;
+  z-index:1;
+}
+.envelope-flap{
+  position:absolute;
+  top:0; left:0; right:0; height:56%;
+  background:linear-gradient(160deg,#FFE3EC,#F6B9CF);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top center;
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+  box-shadow:0 2px 6px rgba(120,40,70,.15);
+  transition:transform .7s cubic-bezier(.6,.05,.3,1);
+  z-index:2;
+}
+.envelope-seal{
+  position:absolute;
+  top:34%; left:50%;
+  width:34px; height:34px;
+  margin:-17px 0 0 -17px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#FF9EBD,#C94577);
+  box-shadow:0 3px 8px rgba(120,40,70,.35);
+  transition:opacity .4s ease, transform .4s ease;
+  z-index:3;
+}
+.letter-scene.is-open .envelope-flap{ transform:rotateX(-165deg); }
+.letter-scene.is-open .envelope-peek{ transform:translateY(0); opacity:1; }
+.letter-scene.is-open .envelope-seal{ opacity:0; transform:scale(.4); }
+
+.envelope-caption{
+  display:block;
+  margin-top:.85rem;
+  font-family:var(--font-script);
+  font-size:1.4rem;
+  color:var(--rose-500);
+}
+
+.letter-content{
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition:max-height .9s ease .25s, opacity .7s ease .25s;
+}
+.letter-scene.is-open .letter-content{ max-height:900px; opacity:1; }
+
+.letter-content p{
+  max-width:58ch;
+  margin:0 auto 1.1rem;
+  line-height:1.75;
+  font-size:1.02rem;
+}
+.letter-scene.is-open .letter-content p{ animation:fade-rise .7s ease forwards; }
+.letter-scene.is-open .letter-content p:nth-of-type(1){ animation-delay:.55s; }
+.letter-scene.is-open .letter-content p:nth-of-type(2){ animation-delay:.95s; }
+.letter-scene.is-open .letter-content p:nth-of-type(3){ animation-delay:1.55s; }
+.letter-scene.is-open .letter-content p:nth-of-type(4){ animation-delay:2.05s; }
+
+.letter-greeting{
+  font-family:var(--font-script);
+  font-size:1.8rem;
+  color:var(--rose-500);
+  margin-bottom:1rem !important;
+}
+.letter-sign{
+  font-family:var(--font-script);
+  font-size:1.45rem;
+  color:var(--rose-500);
+  margin-top:1.1rem;
+}
+
+/* ---------------------------------------------------------
+   meadow — full-screen, layered, alive
+   --------------------------------------------------------- */
+
+.meadow{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.meadow-sky{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,#a9d7f4 0%,#d6edf7 100%);
+  z-index:0;
+}
+
+.meadow-title{
+  position:absolute;
+  top:6%; left:50%;
+  transform:translateX(-50%);
+  z-index:3;
+  text-align:center;
+  padding:.9rem 1.5rem;
+  max-width:min(90vw,440px);
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  border-radius:0;
+  pointer-events:none;
+  text-shadow:0 2px 10px rgba(255,255,255,.9);
+}
+.meadow-title h2{
+  font-family:var(--font-serif);
+  font-weight:normal;
+  font-size:clamp(1.15rem,4vw,1.6rem);
+  color:var(--ink);
+}
+.meadow-title p{
+  margin-top:.35rem;
+  font-size:.92rem;
+  color:var(--ink-soft);
+}
+
+.meadow-plant{ position:absolute; inset:0; z-index:4; pointer-events:none; }
+
+.meadow-reset{
+  position:absolute;
+  right:.9rem; bottom:.8rem;
+  z-index:7;
+  font-size:.75rem;
+  color:var(--ink-soft);
+  opacity:.55;
+  padding:.4rem .6rem;
+  transition:opacity .3s ease;
+}
+.meadow-reset:hover, .meadow-reset:focus-visible{ opacity:1; }
+
+/* the favorite flower */
+
+.favorite-flower{
+  position:absolute;
+  top:40%; left:44%;
+  width:clamp(120px,24vw,200px);
+  z-index:6;
+  transform:translate(-50%,-50%);
+}
+.favorite-flower .halo{
+  position:absolute;
+  inset:-35%;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,.9), rgba(255,182,211,.35) 55%, rgba(255,182,211,0) 75%);
+  z-index:-1;
+  opacity:.45;
+  animation:breathe 4.5s ease-in-out infinite;
+}
+@keyframes breathe{
+  0%,100%{ transform:scale(1); opacity:.4; }
+  50%    { transform:scale(1.15); opacity:.7; }
+}
+.favorite-flower.is-awake .halo{
+  animation:breathe-intense 1.1s ease-in-out infinite;
+  opacity:.9;
+}
+@keyframes breathe-intense{
+  0%,100%{ transform:scale(1.15); opacity:.7; }
+  50%    { transform:scale(1.42); opacity:1; }
+}
+
+.favorite-sway{
+  display:block;
+  transform-origin:50% 100%;
+  animation:sway 7s ease-in-out infinite;
+}
+.favorite-svg{
+  display:block; width:100%; height:auto;
+  transition:transform .5s cubic-bezier(.34,1.2,.4,1), filter .5s ease;
+}
+.favorite-flower.is-awake .favorite-svg{
+  transform:scale(1.18);
+  filter:drop-shadow(0 0 16px rgba(255,255,255,.65));
+}
+.favorite-flower.is-bursting .favorite-svg{
+  transform:scale(.8);
+  opacity:.5;
+}
+.favorite-flower.is-reblooming .favorite-svg{
+  animation:rebloom-pop .8s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes rebloom-pop{
+  0%  { transform:scale(.3); opacity:.3; }
+  60% { transform:scale(1.12); opacity:1; }
+  100%{ transform:scale(1); opacity:1; }
+}
+
+/* ---------------------------------------------------------
+   footer
+   --------------------------------------------------------- */
+
+.footer{
+  text-align:center;
+  padding:3rem 1rem 3.5rem;
+  color:var(--ink-soft);
+  font-size:.95rem;
+  letter-spacing:.02em;
+}
+
+/* ---------------------------------------------------------
+   responsive tweaks
+   --------------------------------------------------------- */
+
+@media (max-width:640px){
+  .letter-frame{ padding-inline:.25rem; }
+  .meadow-title{ top:5%; padding:.7rem 1.1rem; }
+  .favorite-flower{ top:38%; }
+}
+
+/* ---------------------------------------------------------
+   accessibility: reduced motion
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  .petal-field{ display:none; }
+  .flower-instance, .favorite-sway{ animation:none !important; }
+  .halo{ animation:none !important; }
+}
+
+
+/* final garden overrides */
+.meadow{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  overflow:hidden;
+  cursor:pointer;
+  touch-action:manipulation;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.meadow-sky{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,#a9d7f4 0%,#d6edf7 100%);
+  z-index:0;
+  pointer-events:none;
+}
+.garden-grass{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:43%;
+  background:
+    radial-gradient(ellipse at 50% 115%,#416f1b 0%,#5c8a27 45%,#78a83d 75%,rgba(120,168,61,0) 100%);
+  z-index:1;
+  pointer-events:none;
+}
+.garden-grass::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:26%;
+  background:linear-gradient(to top,rgba(39,78,15,.42),rgba(39,78,15,0));
+}
+.meadow-title{
+  position:absolute;
+  top:6%; left:50%;
+  transform:translateX(-50%);
+  z-index:6;
+  text-align:center;
+  padding:.9rem 1.5rem;
+  max-width:min(90vw,440px);
+  background:transparent !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  border-radius:0;
+  pointer-events:none;
+  text-shadow:0 2px 10px rgba(255,255,255,.9);
+}
+.meadow-plant{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  pointer-events:none;
+}
+/* The giant special flower has been removed. */
+.favorite-flower{display:none !important;}
+
+
+/* =========================================================
+   FINAL FIXES
+   ========================================================= */
+.sr-only-defs{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  margin:-1px !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  clip:rect(0,0,0,0) !important;
+  white-space:nowrap !important;
+  border:0 !important;
+  pointer-events:none !important;
+}
+
+/* The grass is a single solid green field. */
+.meadow{background:#d6edf7 !important}
+.garden-grass{
+  height:43% !important;
+  background:linear-gradient(180deg,#79a83d 0%,#5d8d2a 45%,#416f1b 100%) !important;
+  z-index:1 !important;
+}
+.garden-grass::after{background:linear-gradient(to top,rgba(39,78,15,.3),rgba(39,78,15,0)) !important}
+
+/* Never seed flowers near the sky/grass boundary. */
+.meadow-item{z-index:5}
+
+/* ---------------------------------------------------------
+   BOUQUET BUILDER
+   A quiet interlude between the letter and the meadow —
+   pick a bloom, drag it wherever it looks best.
+   --------------------------------------------------------- */
+.bouquet-builder{
+  position:relative;
+  padding:8vh 1.25rem 7vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1.75rem;
+  text-align:center;
+}
+
+.builder-intro h2{
+  font-family:var(--font-serif);
+  font-weight:normal;
+  font-size:clamp(1.15rem,4vw,1.6rem);
+  color:var(--ink);
+}
+
+.builder-intro p{
+  margin-top:.35rem;
+  font-size:.92rem;
+  color:var(--ink-soft);
+}
+
+.builder-canvas{
+  position:relative;
+  width:min(560px,94vw);
+  height:340px;
+  border-radius:28px;
+  background:radial-gradient(ellipse at 50% 28%,#fffdfa 0%,var(--cream) 75%);
+  box-shadow:0 22px 44px rgba(120,50,75,.12), inset 0 0 0 1px rgba(214,51,108,.14);
+  overflow:hidden;
+  touch-action:none;
+}
+
+.builder-hint{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  margin:0;
+  font-size:.85rem;
+  color:var(--ink-soft);
+  opacity:.5;
+  pointer-events:none;
+  transition:opacity .3s ease;
+}
+
+.builder-canvas.has-flowers .builder-hint{ opacity:0; }
+
+.builder-flower{
+  position:absolute;
+  width:76px;
+  transform:translate(-50%,-50%);
+  cursor:grab;
+  touch-action:none;
+  filter:drop-shadow(0 6px 8px rgba(90,35,60,.16));
+  transition:filter .2s ease;
+}
+
+.builder-flower img{
+  display:block;
+  width:100%;
+  height:auto;
+  pointer-events:none;
+  -webkit-user-drag:none;
+  user-select:none;
+}
+
+.builder-flower:active{
+  cursor:grabbing;
+  filter:drop-shadow(0 10px 16px rgba(90,35,60,.26));
+}
+
+.builder-picker{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:.85rem;
+}
+
+.builder-pick{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:var(--cream);
+  box-shadow:0 6px 14px rgba(120,50,75,.16);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:9px;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+
+.builder-pick img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  pointer-events:none;
+}
+
+.builder-pick:hover, .builder-pick:focus-visible{
+  transform:translateY(-4px);
+  box-shadow:0 12px 22px rgba(120,50,75,.22);
+}
+
+.builder-reset{
+  font-size:.75rem;
+  color:var(--ink-soft);
+  opacity:.55;
+  padding:.4rem .6rem;
+  transition:opacity .3s ease;
+}
+.builder-reset:hover, .builder-reset:focus-visible{ opacity:1; }
+
+@media(max-width:600px){
+  .builder-canvas{ height:290px; }
+  .builder-flower{ width:60px; }
+  .builder-pick{ width:50px; height:50px; }
+}
