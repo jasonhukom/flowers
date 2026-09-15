@@ -241,12 +241,12 @@ html{ scrollbar-color:var(--rose-300) var(--blush-50); }
 
 .sun-glow {
   position: absolute;
-  top: -10%;
+  top: -1%; top: -60px;
   left: 50%;
   transform: translateX(-50%);
   width: 80vw;
-  height: 50vh;
-  background: radial-gradient(circle, rgba(255,255,225,0.8) 0%, rgba(255,255,255,0) 70%);
+  height: 80vh;
+  background: radial-gradient(circle, rgba(255,255,225,0.8) 0%, rgba(255,255,255,0) 100%);
   pointer-events: none;
 }
 
