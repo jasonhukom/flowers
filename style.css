@@ -82,7 +82,7 @@ html{ scrollbar-color:var(--rose-300) var(--blush-50); }
 .bouquet {
   position: absolute;
   left: 50%;
-  top: 550px;
+  top: 500px;
   width: min(280px, 72vw);
   aspect-ratio: 672 / 1104;
   transform: translateX(-50%);
