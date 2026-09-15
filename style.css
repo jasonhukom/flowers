@@ -82,7 +82,7 @@ html{ scrollbar-color:var(--rose-300) var(--blush-50); }
 .bouquet {
   position: absolute;
   left: 50%;
-  top: 500px;
+  top: 56px;
   width: min(280px, 72vw);
   aspect-ratio: 672 / 1104;
   transform: translateX(-50%);
@@ -440,7 +440,7 @@ html{ scrollbar-color:var(--rose-300) var(--blush-50); }
   background:radial-gradient(ellipse at 50% 22%, var(--blush-50), var(--blush-100) 72%);
 }
 
-.hero-inner{ position:relative; z-index:2; }
+.hero-inner{ position:absolute; z-index:2; }
 
 .hero-name{
   font-family:var(--font-script);
