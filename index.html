@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>For Malika 🌷</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- shared gradients / filter used by every flower the JS factory builds -->
+<svg class="sr-only-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="gradPetalWhite" cx="35%" cy="25%" r="80%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="55%" stop-color="#FFF7F5"/>
+      <stop offset="100%" stop-color="#F0D6E0"/>
+    </radialGradient>
+    <radialGradient id="gradPetalPink" cx="35%" cy="25%" r="80%">
+      <stop offset="0%" stop-color="#FFEAF2"/>
+      <stop offset="45%" stop-color="#FFACC8"/>
+      <stop offset="100%" stop-color="#E4638F"/>
+    </radialGradient>
+    <radialGradient id="gradPetalRose" cx="35%" cy="25%" r="80%">
+      <stop offset="0%" stop-color="#FFD4E2"/>
+      <stop offset="50%" stop-color="#EE84A9"/>
+      <stop offset="100%" stop-color="#C34577"/>
+    </radialGradient>
+    <radialGradient id="gradCenterGold" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#FFF3C9"/>
+      <stop offset="55%" stop-color="#F2C14E"/>
+      <stop offset="100%" stop-color="#D69A2D"/>
+    </radialGradient>
+    <linearGradient id="gradLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8FBF6E"/>
+      <stop offset="100%" stop-color="#3F6B33"/>
+    </linearGradient>
+    <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ambient drifting petals, present the whole way down the page -->
+<div class="petal-field" id="petalField" aria-hidden="true"></div>
+<!-- fixed overlay used for one-off particle bursts (letter opening, favorite flower) -->
+<div class="burst-layer" id="burstLayer" aria-hidden="true"></div>
+
+<main>
+
+  <header class="hero" id="hero">
+    <div class="hero-inner">
+      <h1 class="hero-name" id="heroName" aria-label="Malika">
+        <span>M</span><span>a</span><span>l</span><span>i</span><span>k</span><span>a</span>
+      </h1>
+      <p class="hero-subtitle">
+        <span class="visually-hidden"></span>
+        <span class="hero-typed" id="heroTyped" aria-hidden="true"></span><span class="hero-cursor" aria-hidden="false"></span>
+      </p>
+    </div>
+    <div class="hero-flowers" id="heroFlowers" aria-hidden="true"></div>
+    <button class="scroll-cue" id="scrollCue" type="button" aria-label="Continue">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14M6 12l6 6 6-6"/></svg>
+    </button>
+    <div class="bouquet" aria-hidden="true">
+      <img class="bouquet-wrap" src="assets/bouquet-wrap.png" alt="" aria-hidden="true">
+      <!-- dense cluster matching the builder screenshot look -->
+      <img class="bouquet-flower flower-1" src="assets/bouquet-rose-red.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-2" src="assets/bouquet-peony-red.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-3" src="assets/bouquet-peony-pink.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-4" src="assets/bouquet-anemone-mint.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-5" src="assets/bouquet-peony-red.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-6" src="assets/bouquet-rose-red.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-7" src="assets/bouquet-daisy-cream.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-8" src="assets/bouquet-anemone-mint.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-9" src="assets/bouquet-peony-pink.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-10" src="assets/bouquet-peony-pink.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-11" src="assets/bouquet-rose-red.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-12" src="assets/bouquet-anemone-mint.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-13" src="assets/bouquet-daisy-cream.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-14" src="assets/bouquet-peony-red.png" alt="" aria-hidden="true">
+      <img class="bouquet-flower flower-15" src="assets/bouquet-rose-red.png" alt="" aria-hidden="true">
+    </div>
+  </header>
+  <section class="letter-scene" id="letterScene">
+    <div class="letter-frame">
+
+      <div class="envelope-stage" id="envelopeStage">
+        <button class="envelope-trigger" id="openLetterBtn" type="button">
+          <span class="envelope" aria-hidden="true">
+            <span class="envelope-body"></span>
+            <span class="envelope-peek"></span>
+            <span class="envelope-flap"></span>
+            <span class="envelope-seal"></span>
+          </span>
+          <span class="envelope-caption">for you)</span>
+        </button>
+      </div>
+
+<div class="letter-content" id="letterContent">
+  <p class="letter-greeting">Dear Malika,</p>
+
+  <p>
+    Beyond the ocean shores<br>
+    Across the seventh sky<br>
+    Bounded by the horizon<br>
+    Separated by distance
+  </p>
+
+  <p>
+    I will always be here with you<br>
+    I'm not going to leave<br>
+    Loneliness won't be with you<br>
+    I'll try and help
+  </p>
+
+  <p>
+    Whatever challenges life has thrown<br>
+    I'll pray so you'll stay strong<br>
+    If you need anything, you have me<br>
+    I'll always give my precious time for you
+  </p>
+
+  <p class="letter-sign">from your dearest, Jason.</p>
+</div>
+
+
+    </div>
+  </section>
+
+  <section class="bouquet-builder" id="bouquetBuilder" aria-label="Build your own bouquet. Pick a flower, then drag it into place.">
+    <div class="builder-intro">
+      <h2>make your own bouquet</h2>
+      <p>tap a flower below, then drag it wherever you like</p>
+    </div>
+
+    <div class="builder-canvas" id="builderCanvas">
+      <p class="builder-hint">your bouquet will grow here</p>
+    </div>
+
+    <div class="builder-picker" id="builderPicker">
+      <button type="button" class="builder-pick" data-flower="peony-pink" aria-label="Add a pink peony">
+        <img src="assets/bouquet-peony-pink.png" alt="">
+      </button>
+      <button type="button" class="builder-pick" data-flower="rose-red" aria-label="Add a red rose">
+        <img src="assets/bouquet-rose-red.png" alt="">
+      </button>
+      <button type="button" class="builder-pick" data-flower="peony-red" aria-label="Add a red peony">
+        <img src="assets/bouquet-peony-red.png" alt="">
+      </button>
+      <button type="button" class="builder-pick" data-flower="anemone-mint" aria-label="Add a mint anemone">
+        <img src="assets/bouquet-anemone-mint.png" alt="">
+      </button>
+      <button type="button" class="builder-pick" data-flower="daisy-cream" aria-label="Add a cream daisy">
+        <img src="assets/bouquet-daisy-cream.png" alt="">
+      </button>
+      <button type="button" class="builder-pick builder-pick--wrap" id="builderWrapToggle" aria-pressed="false" aria-label="Add or remove the bouquet wrap">
+        <img src="assets/bouquet-wrap.png" alt="">
+      </button>
+    </div>
+
+    <button class="builder-reset" id="builderReset" type="button">Clear bouquet</button>
+  </section>
+
+  <section class="meadow" id="meadow" aria-label="An interactive garden meadow. Tap anywhere to grow a flower.">
+    <!-- Single garden background -->
+    <div class="meadow-sky" aria-hidden="true">
+      <div class="sun-glow"></div>
+    </div>
+    <div class="garden-grass" aria-hidden="true"></div>
+
+    <div class="meadow-title">
+      <h2>an endless and infinite garden of flowers</h2>
+      <p>click anywhere to spawn flower</p>
+    </div>
+
+    <!-- Main interactive canvas layer for plants & particles -->
+    <div class="meadow-plant" id="meadowPlant"></div>
+    <button class="meadow-reset" id="meadowReset" type="button">Reset Garden</button>
+  </section>
+
+  <footer class="footer">
+    <p>made for Malika, one flower at a time</p>
+  </footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
