@@ -159,34 +159,6 @@ html{ scrollbar-color:var(--rose-300) var(--blush-50); }
 /* ---------------------------------------------------------
    ambient falling petals + one-off particle bursts
    --------------------------------------------------------- */
-
-.petal-field{
-  position:fixed; inset:0;
-  pointer-events:none;
-  overflow:hidden;
-  z-index:40;
-}
-
-.petal{
-  position:absolute;
-  top:-12%;
-  border-radius:0% 60% 0% 60%;
-  opacity:0;
-  box-shadow:0 1px 3px rgba(120,40,70,.12);
-  animation:fall var(--dur,14s) linear var(--delay,0s) infinite;
-}
-.petal--white{ background:linear-gradient(135deg,#ffffff,#FDE6EE); }
-.petal--pink{  background:linear-gradient(135deg,#FFD1E1,#FF8FAB); }
-.petal--rose{  background:linear-gradient(135deg,#FF9FBD,#D6336C); }
-
-@keyframes fall{
-  0%   { transform:translateY(-10vh) translateX(0) rotate(0deg); opacity:0; }
-  8%   { opacity:.85; }
-  50%  { transform:translateY(52vh) translateX(var(--drift,24px)) rotate(180deg); }
-  92%  { opacity:.85; }
-  100% { transform:translateY(112vh) translateX(0) rotate(360deg); opacity:0; }
-}
-
 .burst-layer{
   position:fixed; inset:0;
   pointer-events:none;
@@ -241,12 +213,12 @@ html{ scrollbar-color:var(--rose-300) var(--blush-50); }
 
 .sun-glow {
   position: absolute;
-  top: -10%;
+  top: -1%; top: -60px;
   left: 50%;
   transform: translateX(-50%);
   width: 80vw;
-  height: 50vh;
-  background: radial-gradient(circle, rgba(255,255,225,0.8) 0%, rgba(255,255,255,0) 70%);
+  height: 80vh;
+  background: radial-gradient(circle, rgba(255,255,225,0.8) 0%, rgba(255,255,255,0) 100%);
   pointer-events: none;
 }
 

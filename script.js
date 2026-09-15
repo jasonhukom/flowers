@@ -163,29 +163,122 @@
       container.appendChild(wrap);
     }
   }
-
+  
   /* =========================================================
-     AMBIENT PETALS + ONE-OFF PARTICLE BURSTS
-     ========================================================= */
+    CANVAS FALLING PETALS
+    Based on the you_and_me petal animation
+    ========================================================= */
 
-  function spawnPetals() {
+  function initFallingPetals() {
     if (reduceMotion) return;
-    var field = document.getElementById('petalField');
-    var kinds = ['petal--white', 'petal--white', 'petal--pink', 'petal--pink', 'petal--rose'];
-    for (var i = 0; i < 18; i++) {
-      var p = document.createElement('div');
-      p.className = 'petal ' + pick(kinds);
-      var size = rand(10, 20);
-      p.style.width = size + 'px';
-      p.style.height = size + 'px';
-      p.style.left = rand(0, 100) + '%';
-      p.style.setProperty('--dur', rand(11, 20).toFixed(1) + 's');
-      p.style.setProperty('--delay', (-rand(0, 20)).toFixed(1) + 's');
-      p.style.setProperty('--drift', rand(-46, 46).toFixed(0) + 'px');
-      field.appendChild(p);
-    }
-  }
 
+    var canvas = document.createElement('canvas');
+    canvas.id = 'fallingPetalsCanvas';
+
+    canvas.style.position = 'fixed';
+    canvas.style.inset = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '40';
+
+    document.body.appendChild(canvas);
+
+    var ctx = canvas.getContext('2d');
+    var W = 0;
+    var H = 0;
+    var petals = [];
+
+    function resize() {
+      var dpr = window.devicePixelRatio || 1;
+
+      W = window.innerWidth;
+      H = window.innerHeight;
+
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function spawnPetal() {
+      if (Math.random() >= 0.12) return;
+
+      var z = rand(0.5, 1.4);
+
+      petals.push({
+        x: rand(0, W),
+        y: -20,
+
+        vx: rand(-1, 1) * z,
+        vy: rand(1, 2.5) * z,
+
+        rot: rand(0, Math.PI * 2),
+        rotS: rand(-0.04, 0.04),
+
+        size: rand(8, 18) * z,
+
+        color: 'hsl(' +
+          rand(330, 360) + ',' +
+          rand(70, 100) + '%,' +
+          rand(55, 75) + '%)',
+
+        alpha: rand(0.5, 1) * Math.min(z, 1),
+
+        swing: rand(0, Math.PI * 2),
+        swingS: rand(0.02, 0.05)
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+
+      spawnPetal();
+
+      petals = petals.filter(function (p) {
+        return p.y < H + 30;
+      });
+
+      petals.forEach(function (p) {
+        p.y += p.vy;
+        p.swing += p.swingS;
+        p.x += p.vx + Math.sin(p.swing) * 1.2;
+        p.rot += p.rotS;
+
+        ctx.save();
+
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+
+        ctx.globalAlpha = p.alpha;
+
+        ctx.beginPath();
+        ctx.ellipse(
+          0,
+          0,
+          p.size / 2,
+          p.size,
+          0,
+          0,
+          Math.PI * 2
+        );
+
+        ctx.fillStyle = p.color;
+        ctx.fill();
+
+        ctx.restore();
+      });
+
+      ctx.globalAlpha = 1;
+
+      requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    draw();
+  }
   function spawnParticles(x, y, count) {
     if (reduceMotion || !count) return;
     var layer = document.getElementById('burstLayer');
@@ -546,7 +639,7 @@
      ========================================================= */
 
   document.addEventListener('DOMContentLoaded', function () {
-    spawnPetals();
+    initFallingPetals();
     scatterHero();
     scatterMeadow();
     typeSubtitle();
